@@ -27,6 +27,7 @@ const VideoPlayer = ({ youtubeId }) => {
             videoId="{youtubeId}"
             onReady={(e) => e.target.pauseVideo()}
             opts={option}
+            onError={(e) => alert("Video Tidak Ditemukan")}
           />
         </div>
       </>
