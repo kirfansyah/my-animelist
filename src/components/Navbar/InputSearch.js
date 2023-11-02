@@ -1,11 +1,28 @@
 "use client";
 import { MagnifyingGlass } from "@phosphor-icons/react";
+import { useRouter } from "next/navigation";
+import { useRef } from "react";
 
 const InputSearch = () => {
+  const searchRef = useRef();
+  const router = useRouter();
+  const handleSearch = (event) => {
+    if (event.key === "Enter" || event.type === "click") {
+      event.preventDefault();
+      const keyword = searchRef.current.value;
+      router.push(`/search/${keyword}`);
+    }
+  };
+
   return (
     <div className="relative">
-      <input placeholder="Cari Anime..." className="p-2 rounded w-full"></input>
-      <button className="absolute top-2 end-2">
+      <input
+        placeholder="Cari Anime..."
+        className="p-2 rounded w-full"
+        ref={searchRef}
+        onKeyDown={handleSearch}
+      ></input>
+      <button className="absolute top-2 end-2" onClick={handleSearch}>
         <MagnifyingGlass size={24} />
       </button>
     </div>
